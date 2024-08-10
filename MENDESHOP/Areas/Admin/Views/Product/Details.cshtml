@@ -1,0 +1,48 @@
+﻿@model MENDESHOP.Models.Product
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Areas/Admin/Views/Shared/AdminLayout.cshtml";
+    <link href="~/Content/dmnut.css" rel="stylesheet" />
+}
+<style>
+    .mau {
+        color: #000000 !important
+    }
+</style>
+<div style="margin: 10px auto; width: 70%;">
+    <h2 style="text-align: center">CHI TIẾT SẢN PHẨM</h2>
+    <div>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                TÊN SẢN PHẨM
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.ProName)
+            </dd>
+            <dt>
+                GIÁ
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.ProPrice)
+            </dd>
+            <dt>
+                HÌNH MINH HỌA
+            </dt>
+            <dd>
+                <img style=" height: 350px" src="~/images/@Model.ProImage" />
+            </dd>
+            <dt>
+                NHÓM SẢN PHẨM
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Category.CatName)
+            </dd>
+        </dl>
+    </div>
+    <p style="margin-left: 620px; font-size: 16px">
+        @Html.ActionLink("Edit", "Edit", new { id = Model.ProId }, new { @class = "mau button-39" }) |
+        @Html.ActionLink("Back to list", "Index", new { @class = "mau" })
+    </p>
+</div>
+

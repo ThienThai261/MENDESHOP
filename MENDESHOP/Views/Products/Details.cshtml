@@ -1,0 +1,96 @@
+﻿@model MENDESHOP.Models.Product
+@{
+    ViewBag.Title = "Details";
+    <link rel="stylesheet" type="text/css" href="~/Content/MendeStyle.css" />
+    <script src="~/Scripts/modernizr-2.6.2.js"></script>
+
+}
+<div class="details">
+    <div class="return" style="margin-bottom:50px">
+        <div class="container-fluid" style="background-color: #f7f5f5; height:50px;width:100%">
+            <div class="container" style="display:flex; line-height: 50px; ">
+                <a style="text-decoration: none; color: black" href="/Products/Index">Trang chủ</a>
+                <p>/</p>
+                <a style="text-decoration: none; color: black" href="#">Danh mục</a>
+                <p>/</p>
+                <p>@Model.ProName</p>
+            </div>
+        </div>
+    </div>
+    <div class="container" style="margin-bottom:50px">
+        <div class="row">
+            <div class="col-sm-8">
+                <div class="row">
+                    <div class="col-sm-3">
+                        <img src="~/images/@Model.ProImage" alt="Mountains" style="width:100%; padding:10px 0" onclick="myFunction(this);">
+                        <img src="~/images/@Model.AfterProImage" alt="Lights" style="width:100%" onclick="myFunction(this);">
+                    </div>
+                    <div class="col-sm-9">
+                        <img id="expandedImg" style="width:100%" />
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-4" style="font-size:20px">
+                <b>@Model.ProName</b>
+                <hr />
+                <b>@Model.ProPrice đ</b>
+                <hr style="margin-bottom:10px" />
+                <div class="row">
+                    <div class="col-sm-6">
+                        <a class="btn btn-default" href="@Url.Action("AddToCart1", "ShoppingCart", new {id = Model.ProId })" id="addToCartBtn">
+                            THÊM VÀO GIỎ HÀNG
+                        </a>
+                    </div>
+                    <div class="col-sm-6">
+                        <a class="btn btn-danger " href="@Url.Action("AddToCart", "ShoppingCart", new {id = Model.ProId })">
+                            Mua ngay
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<style>
+    .centered-notification {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: #ffffff;
+        padding: 20px;
+        border-radius: 5px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        z-index: 9999;
+    }
+</style>
+
+<script>
+    $(document).ready(function () {
+        $("#addToCartBtn").click(function () {
+            var notification = $("<div>", { class: "centered-notification" }).text("Bạn đã thêm vào giỏ hàng thành công");
+            $("body").append(notification);
+        });
+    });
+</script>
+<script>
+    window.addEventListener('DOMContentLoaded', (event) => {
+        var expandImg = document.getElementById("expandedImg");
+        var thumbnailImgs = document.querySelectorAll(".col-sm-3 img");
+
+        thumbnailImgs.forEach(function (img) {
+            img.addEventListener('click', function () {
+                expandImg.src = this.src;
+                expandImg.parentElement.style.display = "block";
+            });
+        });
+
+        // Mặc định hiển thị hình ảnh đầu tiên
+        var firstImage = thumbnailImgs[0];
+        expandImg.src = firstImage.src;
+        expandImg.parentElement.style.display = "block";
+    });
+</script>

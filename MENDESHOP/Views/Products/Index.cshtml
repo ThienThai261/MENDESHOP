@@ -1,0 +1,89 @@
+﻿@model IEnumerable<MENDESHOP.Models.Product>
+@{
+    ViewBag.Title = "Index";
+    <link rel="stylesheet" type="text/css" href="~/Content/MendeStyle.css" />
+    
+}
+<div class="home" >
+    <img src="~/images/home1.png" style="width:100%; height:auto"/>
+    <div class="text-center" style="margin:50px 0">
+        <a href="#" style="font-size:30px;">ÁO MỚI NÈ</a>
+        <hr style="width:5%" class="text-center" />
+        <a href="#">Xem thêm</a>
+    </div>
+    <div class="container">
+        <div class="row">
+            @foreach (var item in Model)
+            {
+                if (item.CatId ==1)
+                {
+                    <div class="col-sm-3 col-lg-3 col-md-3 text-center" style="margin-bottom:50px;">
+                        <a href="@Url.Action("Details", new {id=item.ProId})"> <img src="~/images/@item.ProImage" style="width:100%; height:auto; margin-bottom:20px; " /></a>
+                        <a href="@Url.Action("Details", new {id=item.ProId})">@item.ProName</a>
+                        <p>@item.ProPrice đ</p>
+                    </div>
+                }
+            }
+        </div>
+    </div>
+    <div class="container-fluid text-center" style="margin-bottom:30px">
+        <div class="threePicture">
+            <div class="row ">
+                <div class="col-sm-4 col-lg-4 col-md-4">
+                    <a href="#">
+                        <img style="width:100%; height:auto" src="~/images/a1.jpg" />
+                        <b class="centered">SILKY CARO</b>
+                    </a>
+                </div>
+                <div class="col-sm-4 col-lg-4 col-md-4">
+                    <a href="#">
+                        <img style="width:100%; height:auto" src="~/images/a2.jpg" />
+                        <b class="centered">THE CROP JACKET</b>
+                    </a>
+                </div>
+                <div class="col-sm-4 col-lg-4 col-md-4">
+                    <a href="#">
+                        <img style="width:100%; height:auto" src="~/images/a3.jpg" />
+                        <b class="centered">KARIM SHIRT</b>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <h3 class="text-center">THƯƠNG HIỆU</h3>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-2 col-lg-2 col-md-2">
+                <img style="width: 100%; height: auto" src="~/images/th_1.png" />
+            </div>
+            <div class="col-sm-2 col-lg-2 col-md-2">
+                <img style="width: 100%; height: auto" src="~/images/th_2.png" />
+            </div>
+            <div class="col-sm-2 col-lg-2 col-md-2">
+                <img style="width:100%; height:auto" src="~/images/th_3.png" />
+            </div>
+            <div class="col-sm-2 col-lg-2 col-md-2">
+                <img style="width: 100%; height: auto" src="~/images/th_4.png" />
+            </div>
+            <div class="col-sm-2 col-lg-2 col-md-2" >
+                <img style="width: 100%; height: auto" src="~/images/th_5.png" />
+            </div>
+            <div class="col-sm-2 col-lg-2 col-md-2">
+                <img style="width: 100%; height: auto" src="~/images/th_6.png" />
+            </div>
+        </div>
+    </div>
+    <hr style="width:5%" />
+    <div class="container" style="padding:0 300px;">
+        <form style="width:630px; margin:80px 0" >
+            <div class="input-group" >
+                <input type="text" style="width:525px; height:65px; " class="form-control" placeholder="Nhập Email của bạn">
+                <button class="btn btn-default" style="width:100px; height:65px; background-color:black" type="submit">
+                    <span style="color:white">GỬI</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+

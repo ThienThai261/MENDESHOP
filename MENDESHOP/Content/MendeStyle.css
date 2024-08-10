@@ -1,0 +1,219 @@
+﻿/* CSS HEADER START*/
+#header img{
+    max-width:256px;
+    height:auto
+}
+nav{
+    display:flex;
+    justify-content:space-between;
+    justify-items:center;
+}
+#logo{
+    padding:5px 0;
+}
+#main-menu{
+    display:flex;
+    margin:0;
+    padding:0;
+    list-style:none;
+    padding-top:40px
+}
+#main-menu li{
+    position:relative
+}
+#main-menu li a{
+    color:black;
+    display:block;
+    padding: 20px 25px;
+    text-decoration:none
+}
+#main-menu ul.sub-menu{
+    position:absolute;
+    background-color:white;
+    padding:15px 0;
+    list-style:none;
+    width:200px;
+    display:none
+}
+#main-menu li:hover>ul.sub-menu{
+    display:block
+}
+#main-menu ul.sub-menu a{
+    padding:10px 25px;
+    border-bottom: 1px solid #dcd5d5;
+    color:black;
+}
+#main-menu ul.sub-menu a li:last-child a{
+    border:none
+}
+/* CSS HEADER END*/
+/* CSS FOOTER START*/
+.footer .tren {
+    background-color: #eaeaea;
+    height: 70px;
+}
+
+    .footer .tren a {
+        color: red;
+        text-decoration: none;
+    }
+
+.footer .container-fluid {
+    padding: 0px;
+}
+
+.footer .row {
+    margin-bottom: 20px;
+    margin-top: 20px;
+}
+
+.footer .tren p {
+    line-height: 70px;
+    padding-left: 100px;
+    font-size: 17px;
+}
+
+.footer .container-fluid .row .col-sm-3 ul {
+    list-style: none;
+}
+
+.footer .container-fluid .row .col-sm-3 img {
+    width: 60%;
+}
+
+.footer .container-fluid .row .col-sm-3 ul {
+    text-decoration: none;
+    font-size: 17px;
+}
+
+.fanpage img {
+    width: 15%;
+    height: auto;
+}
+
+.fanpage .bottom-left {
+    position: absolute;
+    bottom: 5px;
+    left: 35px;
+    display: block;
+    background-color: white;
+}
+
+.fanpage .top-left {
+    position: absolute;
+    top: 35px;
+    left: 35px;
+}
+
+.fanpage .centered {
+    position: absolute;
+    top: 43%;
+    left: 19%;
+    transform: translate(-50%, -50%);
+}
+
+    .fanpage .centered a {
+        color: white;
+        font-size: 14px;
+    }
+
+    .fanpage .centered p {
+        color: white;
+        font-size: 14px;
+        margin: 0;
+    }
+
+.fanpage .bottom-right {
+    position: absolute;
+    bottom: 5px;
+    right: 551px;
+    display: block;
+    background-color: white;
+}
+
+.fanpage a {
+    text-decoration: none;
+    font-size: 12px;
+    color: black;
+}
+
+.footer .col-sm-3 ul li {
+    padding: 5px;
+}
+
+.footer .col-sm-3 p {
+    margin-left: 43px;
+}
+
+.footer .col-sm-3 span {
+    margin-right: 10px;
+}
+
+.footer .col-sm-6 .p1 p {
+    margin-left: 15px;
+}
+
+.footer ul li {
+    font-family: sans-serif;
+    font-size: 14px;
+}
+/* CSS FOOTER END*/
+
+/*CSS INDEX START*/
+.home .text-center a {
+    color: black;
+    text-decoration: none;
+}
+.container-fluid .threePicture .centered {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+.container-fluid .threePicture b{
+    font-size:20px
+}
+/*CSS INDEX END*/
+
+/*CSS ABOUT START*/
+.about p {
+    font-size: 14px;
+    color: #8d8b8b;
+    font-family:Arial, Helvetica, sans-serif
+}
+/*CSS ABOUT END*/
+
+/*CSS POLICY START*/
+.policy p {
+    font-size: 14px;
+    color: #8d8b8b;
+    font-family: Arial, Helvetica, sans-serif
+}
+/*CSS POLICY END*/
+
+/*CSS BAG START*/
+
+/*CSS BAG END*/
+/*CSS RETURN START*/
+.return .container a {
+    margin: 0 5px 0 5px;
+}
+.return .container p {
+    margin: 0 0 0 5px;
+}
+/*CSS RETURN END*/
+.details .container .col-sm-4 hr {
+    margin: 0
+}
+.details .row a{
+    padding:0;
+    line-height:52px;
+}
+.details .row .btn {
+    border-radius: 0;
+    height: 52px;
+    width: 100%;
+}
+.adminPgae{
+    margin-top: 150px;
+}

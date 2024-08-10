@@ -1,0 +1,96 @@
+﻿@model MENDESHOP.Models.User
+
+@{
+    ViewBag.Title = "Register1";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Register1</h2>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>User</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.UserName, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.UserName, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.UserName, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.UserPassword, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.UserPassword, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.UserPassword, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Sdt, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Sdt, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Sdt, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+
+@*@{
+        ViewBag.Title = "Register";
+        Layout = "~/Views/Shared/_Layout.cshtml";
+        <link href="~/Content/MendeStyle.css" rel="stylesheet" type="text/css" />
+        <link href="~/Content/MendeStyle.css" rel="stylesheet" type="text/css" />
+        <link href="~/Content/login2.css" rel="stylesheet" />
+    }
+    <div style="display:flex; align-items:center; justify-content:center;">
+        <div class="login-page">
+            <div class="form">
+                @using (Html.BeginForm("Login", "User", FormMethod.Post))
+                {
+
+                    <h2><i class="fas fa-lock"></i> Register</h2>
+                    @Html.ValidationSummary(true)
+                    <input type="text" placeholder="Uesr Name *" name="UserName" required />
+                    <input type="text" placeholder="phone *" name="Sdt" required />
+                    <input type="email" placeholder="Email *" name="Email" required />
+                    <input type="password" placeholder="Password *" name="UserPassword" required />
+                    <button type="submit">create</button>
+                    <p class="message">Already registered? <a href="~/User/Login">Sign In</a></p>
+                }
+
+
+            </div>
+        </div>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+        <script src="~/Scripts/login.js"></script>
+    </div>*@

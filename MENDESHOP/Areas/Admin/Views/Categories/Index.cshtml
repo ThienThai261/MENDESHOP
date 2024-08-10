@@ -1,0 +1,47 @@
+﻿@model IEnumerable<MENDESHOP.Models.Category>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/AdminLayout.cshtml";
+    <link href="~/Content/dmnut.css" rel="stylesheet" />
+}
+
+
+<div style="margin: 10px auto; width: 98%;">
+    <h2 style="margin-left: 500px">THÔNG TIN CATEGORIES</h2>
+    <p style="margin-left: 217px">
+        @Html.ActionLink("TẠO MỚI", "Create", null, new
+   {
+       @class = "button-39"
+   })
+    </p>
+    <table class="table tbl-content td made-with-love" style="left:210px; position: relative; color: #000000!important">
+        <tr>
+            <th>
+                MÃ CATEGORY
+            </th>
+            <th>
+                TÊN CATEGORY
+            </th>
+            <th>
+                LỆNH
+            </th>
+        </tr>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Id, new { @class = "mau" })
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CatName, new { @class = "mau" })
+                </td>
+                <td>
+                    @Html.ActionLink("Sửa", "Edit", new { id = item.Id }, new { @class = "button-39" })
+                    @Html.ActionLink("Chi tiết", "Details", new { id = item.Id }, new { @class = "button-39" })
+                  
+                </td>
+            </tr>
+        }
+    </table>
+</div>
+

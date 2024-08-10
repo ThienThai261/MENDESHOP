@@ -1,0 +1,36 @@
+﻿@model IEnumerable<MENDESHOP.Models.Product>
+@{
+    ViewBag.Title = "Bag";
+    <link rel="stylesheet" type="text/css" href="~/Content/MendeStyle.css" />
+}
+
+<div class="bag">
+    <img src="~/images/slide_1.png" style="width:100%; height:auto" />
+    <div class="return">
+        <div class="container-fluid" style="background-color: #f7f5f5; height:50px;width:100%">
+            <div class="container" style="display:flex; line-height: 50px; ">
+                <a style="text-decoration: none; color: black" href="/Products/Index">Trang chủ</a>
+                <p>/</p>
+                <a style="text-decoration: none; color: black" href="#">Danh mục</a>
+                <p>/</p>
+                <p>BACKPACK | BAG</p>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <h1 style="font-weight:700;font-size:24px">BACKPACK | BAG</h1>
+        <div class="row">
+            @foreach (var item in Model)
+            {
+                if (item.CatId == 5)
+                {
+                    <div class="col-sm-3 col-lg-3 col-md-3 text-center" style="margin-bottom:50px;">
+                        <a href="@Url.Action("Details", new {id=item.ProId})"> <img src="~/images/@item.ProImage" style="width:100%; height:auto; margin-bottom:20px; " /></a>
+                        <a style="text-decoration:none; color:black" href="@Url.Action("Details", new {id=item.ProId})">@item.ProName</a>
+                        <p>@item.ProPrice đ</p>
+                    </div>
+                }
+            }
+        </div>
+    </div>
+</div>

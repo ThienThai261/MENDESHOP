@@ -1,0 +1,57 @@
+﻿
+
+
+
+@model IEnumerable<MENDESHOP.Models.Administrator>
+
+    @{
+        ViewBag.Title = "Setting";
+        Layout = "~/Areas/Admin/Views/Shared/AdminLayout.cshtml";
+    }
+    <link href="~/Content/dmnut.css" rel="stylesheet" />
+    <script src="~/Scripts/Changepassword.js"></script>
+    <link href="~/Content/ionicons.min.css" rel="stylesheet" />
+    <link href="~/Content/adminlte.min.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet" />
+
+<style>
+    .boxbox {
+        width: 75%;
+        height: 55px;
+        margin: 7px 0 10px 0;
+        border: 1px solid transparent;
+        border-radius: 10px;
+        background: #ededed;
+        color: #272727;
+        padding: 0 20px;
+        font-weight: 500;
+        -webkit-appearance: none;
+    }
+</style>
+@{
+    var admin = Session["admin"] as MENDESHOP.Models.Administrator;
+}
+<div>
+    <div style="margin: 10px auto; width: 98%;">
+        <h1 style="margin-left: 500px">Cài đặt tài khoản</h1>
+    </div>
+    <div class="row" style="text-align: center">
+        <div class="col-sm-6">
+            <p style="font-size: 30px">
+                Lịch sử đăng nhập
+            </p>
+            <div><i class="fas fa-exclamation-triangle"></i>không có thông tin hiển thị</div>
+        </div>
+        <div class="col-sm-6">
+            <p style="font-size: 30px">
+                Thông tin tài khoản
+            </p>
+            <input required type="text" placeholder="ID account" class="boxbox" id="id" value="@admin.ID" />
+            <input required type="text" placeholder="Name admin" class="boxbox" id="nameadmin" value="@admin.RollName" />
+            <input required type="text" placeholder="Mật khẩu hiện tại" class="boxbox" value="@admin.Passadd" />
+        </div>
+    </div>
+</div>
+
+
+

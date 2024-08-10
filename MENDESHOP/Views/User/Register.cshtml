@@ -1,0 +1,27 @@
+﻿@{
+    ViewBag.Title = "Register";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    <link href="~/Content/MendeStyle.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/MendeStyle.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/login2.css" rel="stylesheet" />
+}
+<div style="display:flex; align-items:center; justify-content:center;">
+    <div class="login-page">
+        <div class="form">
+            @using (Html.BeginForm("Login", "User", FormMethod.Post))
+            {
+
+                <h2><i class="fas fa-lock"></i> Register</h2>
+                @Html.ValidationSummary(true)
+                <input type="text" placeholder="Uesr Name *" name="UserName" required />
+                <input type="text" placeholder="phone *" name="Sdt" required />
+                <input type="email" placeholder="Email *" name="Email" required />
+                <input type="password" placeholder="Password *" name="UserPassword" required />
+                <button type="submit">create</button>
+                <p class="message">Already registered? <a href="~/User/Login">Sign In</a></p>
+            }
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="~/Scripts/login.js"></script>
+</div>

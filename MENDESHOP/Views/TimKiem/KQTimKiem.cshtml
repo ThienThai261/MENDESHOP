@@ -1,0 +1,113 @@
+﻿
+
+@using MENDESHOP.Models;
+@model IEnumerable<Product>
+@{
+    ViewBag.Title = "KQTimKiem";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="home">
+  
+    <div class="text-center" style="margin:50px 0">
+       
+        <hr style="width:5%" class="text-center" />
+        
+        <div>
+            <div class="search-popup-content div11">
+                @using (Html.BeginForm("KQTimKiem", "TimKiem"))
+                {
+
+                   <div class="div1" style="
+                            margin: 20px 430px;
+                        ">
+                       <div class="div2">
+                           <input required="" id="inputSearchAuto" maxlength="40" autocomplete="off" class="import1 searchinput input-search" type="text" size="20" name="sTuKhoa" placeholder="Tìm kiếm sản phẩm...">
+                       </div>
+
+                       <button type="submit" class="bt_search">
+                           <svg version="1.1" class="svg-search" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 24 27" style="overflow: hidden;width: 18px;overflow: hidden;height: 45px;fill: #fff;enable-background:new 0 0 24 27;" xml:space="preserve"><path d="M10,2C4.5,2,0,6.5,0,12s4.5,10,10,10s10-4.5,10-10S15.5,2,10,2z M10,19c-3.9,0-7-3.1-7-7s3.1-7,7-7s7,3.1,7,7S13.9,19,10,19z"></path><rect x="17" y="17" transform="matrix(0.7071 -0.7071 0.7071 0.7071 -9.2844 19.5856)" width="4" height="8"></rect></svg>
+                       </button>
+                   </div>
+
+
+                }
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+
+            @foreach (var item in Model)
+            {
+                if (item.CatId >= 1 && item.CatId <= 6)
+                {
+                    <div class="col-sm-3 col-lg-3 col-md-3 text-center" style="margin-bottom:50px;">
+                        <a href="@Url.Action("Details", new {id=item.ProId})"> <img src="~/images/@item.ProImage" style="width:100%; height:auto; margin-bottom:20px; " /></a>
+                        <a href="@Url.Action("Details", new {id=item.ProId})">@item.ProName</a>
+                        <p>@item.ProPrice đ</p>
+                    </div>
+                }
+            }
+        </div>
+    </div>
+    <div class="container-fluid text-center" style="margin-bottom:30px">
+        <div class="threePicture">
+            <div class="row ">
+                <div class="col-sm-4 col-lg-4 col-md-4">
+                    <a href="#">
+                        <img style="width:100%; height:auto" src="~/images/a1.jpg" />
+                        <b class="centered">SILKY CARO</b>
+                    </a>
+                </div>
+                <div class="col-sm-4 col-lg-4 col-md-4">
+                    <a href="#">
+                        <img style="width:100%; height:auto" src="~/images/a2.jpg" />
+                        <b class="centered">THE CROP JACKET</b>
+                    </a>
+                </div>
+                <div class="col-sm-4 col-lg-4 col-md-4">
+                    <a href="#">
+                        <img style="width:100%; height:auto" src="~/images/a3.jpg" />
+                        <b class="centered">KARIM SHIRT</b>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <h3 class="text-center">THƯƠNG HIỆU</h3>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-2 col-lg-2 col-md-2">
+                <img style="width: 100%; height: auto" src="~/images/th_1.png" />
+            </div>
+            <div class="col-sm-2 col-lg-2 col-md-2">
+                <img style="width: 100%; height: auto" src="~/images/th_2.png" />
+            </div>
+            <div class="col-sm-2 col-lg-2 col-md-2">
+                <img style="width:100%; height:auto" src="~/images/th_3.png" />
+            </div>
+            <div class="col-sm-2 col-lg-2 col-md-2">
+                <img style="width: 100%; height: auto" src="~/images/th_4.png" />
+            </div>
+            <div class="col-sm-2 col-lg-2 col-md-2">
+                <img style="width: 100%; height: auto" src="~/images/th_5.png" />
+            </div>
+            <div class="col-sm-2 col-lg-2 col-md-2">
+                <img style="width: 100%; height: auto" src="~/images/th_6.png" />
+            </div>
+        </div>
+    </div>
+    <hr style="width:5%" />
+    <div class="container" style="padding:0 300px;">
+        <form style="width:630px; margin:80px 0">
+            <div class="input-group">
+                <input type="text" style="width:525px; height:65px; " class="form-control" placeholder="Nhập Email của bạn">
+                <button class="btn btn-default" style="width:100px; height:65px; background-color:black" type="submit">
+                    <span style="color:white">GỬI</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+

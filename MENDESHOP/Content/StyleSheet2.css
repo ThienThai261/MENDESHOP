@@ -1,0 +1,252 @@
+﻿body{
+    background-color:white;
+}
+.page-header{
+    margin:0;
+    padding:0;
+    width:100%;
+}
+
+.page-header .navbar-default {
+    margin: 0;
+    border-color: white;
+    margin: 0 auto;
+    background-color:white;
+}
+.page-header .navbar-brand{
+    padding:0;
+    height:0px;
+}
+.page-header img {
+    width: 19%;
+    height: auto;
+    margin-left: 30px;
+    margin-top: -3px;
+}
+.navbar-default .navbar-nav {
+    margin-left:300px;
+}
+.navbar-default .navbar-nav > li > a {
+    color: black;
+    font-weight:600;
+    margin-top:40px;
+    font-size:13px;
+}
+.page-header .container-fluid{
+    padding:0;
+    margin:0 auto;
+    background-color:white;
+    height:130px;
+    width:1300px;
+}
+.page-header .right{
+    margin-left:30px;
+}
+.page-header .glyphicon{
+    font-size:25px;
+}
+.sp .thongTin {
+    margin-top: 10px;
+}
+
+.sp .container .row a {
+    text-decoration: none;
+    color: black;
+    margin-top: 10px;
+}
+
+.footer .tren {
+    background-color: #eaeaea;
+    height: 70px;
+}
+.footer .tren a {
+    color: red;
+    text-decoration: none;
+}
+
+.footer .container-fluid {
+    padding: 0px;
+}
+
+.footer .row {
+    margin-bottom: 20px;
+    margin-top: 20px;
+}
+
+.footer .tren p {
+    line-height: 70px;
+    padding-left: 100px;
+    font-size: 17px;
+}
+
+.footer .container-fluid .row .col-sm-3 ul {
+    list-style: none;
+}
+
+.footer .container-fluid .row .col-sm-3 img {
+    width: 60%;
+}
+
+.footer .container-fluid .row .col-sm-3 ul {
+    text-decoration: none;
+    font-size: 17px;
+}
+.fanpage img{
+    width:15%;
+    height:auto;
+}
+.fanpage .bottom-left {
+    position: absolute;
+    bottom: 5px;
+    left: 35px;
+    display: block;
+    background-color: white;
+}
+.fanpage .top-left {
+    position: absolute;
+    top: 35px;
+    left: 35px;
+}
+.fanpage .centered {
+    position: absolute;
+    top: 43%;
+    left: 19%;
+    transform: translate(-50%, -50%);
+}
+.fanpage .centered a{
+    color:white;
+    font-size:14px;
+}
+.fanpage .centered p{
+    color:white;
+    font-size:14px;
+    margin:0;
+}
+.fanpage .bottom-right {
+    position: absolute;
+    bottom:5px;
+    right: 545px;
+    display:block;
+    background-color:white;
+}
+
+.fanpage a{
+    text-decoration:none;
+    font-size:12px;
+    color:black;
+}
+.footer .col-sm-3 ul li{
+    padding:5px;
+}
+.footer .col-sm-3 p{
+    margin-left:43px;
+}
+.footer .col-sm-3 span{
+    margin-right:10px;
+}
+.footer .col-sm-6 .p1 p {
+    margin-left: 15px;
+}
+.footer ul li {
+    font-family: sans-serif;
+    font-size: 14px;
+}
+.top img {
+    width: 100%;
+    height: auto;
+}
+
+.top a {
+    color: black;
+    text-decoration:none;
+}
+
+.top1 {
+    padding-top: 30px;
+}
+
+    .top1 a {
+        font-size: 30px;
+    }
+
+.top2 a {
+    font-size: 15px;
+}
+
+.top2 {
+    bottom: 50px;
+}
+
+.container .row img {
+    width: 98%;
+    height: auto;
+}
+
+.container .row {
+    padding-top: 50px;
+}
+
+hr {
+    width: 10%;
+}
+
+.qc .container-fluid .row .col-sm-4 img {
+    width: 96%;
+    height: auto;
+    margin-bottom: 50px;
+}
+
+.thwHieu .row .col-sm-2 {
+    padding: 0 5px;
+}
+
+    .thwHieu .row .col-sm-2 img {
+        width: 100%;
+        height: auto;
+    }
+.sreach {
+    margin-top: 60px;
+    margin-bottom:60px;
+}
+.sreach .input-group{
+    margin:0 auto;
+    width:525px;
+    height:65px;
+}
+.sreach .input-group input{
+    width:525px;
+    height:65px;
+}
+.sreach .input-group button {
+    width:88px;
+    height:65px;
+}
+.about p {
+    font-size: 14px;
+    margin: 0 0 10px 0;
+    line-height: 21px;
+}
+.sreach .btn-default{
+    background-color:black;
+    color:white;
+}
+.about h1 {
+    font-weight: 700;
+    font-size: 24px;
+}
+
+.about img {
+    vertical-align: middle;
+    width: 100%;
+    height: auto;
+}
+.thongTin h5{
+    font-size:14px;
+    font-weight:600;
+}
+.about .container-fluid {
+    padding: 0 100px;
+}
+.about .GThieu span {
+    color: red;
+}

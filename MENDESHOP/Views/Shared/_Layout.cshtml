@@ -1,0 +1,183 @@
+﻿
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title</title>
+    <link href="~/Content/hangl.css" rel="stylesheet" />
+    <link href="~/Content/timkiem1.css" rel="stylesheet" />
+    <link href="~/Content/timkiem.css" rel="stylesheet" type="text/css" />
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link href="~/Content/MendeStyle.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <script src="~/Scripts/modernizr-2.6.2.js"></script>
+</head>
+@{ var user = Session["User"] as MENDESHOP.Models.User;}
+<body style="overflow-x: hidden; ">
+
+    <div class="container-fluid" style="padding:0">
+        <div id="header">
+
+            <nav class="container-fluid" style=" display: flex;margin:0 auto;max-width:1650px">
+                <a href="/Products/Index" id="logo">
+                    <img src="~/images/mendestudio.png" />
+                </a>
+                <ul id="main-menu">
+                    <li><a href="/Products/Index">TRANG CHỦ | HOME</a></li>
+                    <li>
+                        <a href="#">BỘ SƯU TẬP | COLLECTIONS</a>
+                        <ul class="sub-menu">
+                            <li><a href="/Products/Shirt">SHIRT</a></li>
+                            <li><a href="/Products/Jacket">JACKET - HOODIE</a></li>
+                            <li><a href="/Products/Tee">TEE</a></li>
+                            <li><a href="/Products/Bag">BACKPACK | BAG</a></li>
+                            <li><a href="/Products/Pants">PANTS</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="/About/Index">MENDE | ABOUT US</a></li>
+                    <li><a href="/Policy/Index">CHÍNH SÁCH ĐỔI TRẢ</a></li>
+                    @{ if (user == null)
+                        {
+                            <li><a href="/User/Login"><span class="glyphicon glyphicon-user "></span></a></li>
+                        }
+                        else
+                        {
+                            <li><a href="#" id="user-info-link" onclick="toggleUserInfo()"><span class="glyphicon glyphicon-user right"></span></a></li>
+                        }
+
+                    }
+                    <li><a href="/ShoppingCart/GetCartInfo" id="cart-link"><span class="glyphicon glyphicon-shopping-cart"></span></a></li>
+                    <li><a href="#" id="search-link" onclick="toggleSearchPopup()"><span class="glyphicon glyphicon-search right"></span></a></li>
+                </ul>
+                <div id="search-popup" class="search-popup">
+                    <p class="titlebox">Tìm kiếm</p>
+                    <div class="search-popup-content div1">
+                        @using (Html.BeginForm("KQTimKiem", "TimKiem"))
+                        {
+
+                            <div class="div1">
+                                <div class="div2">
+                                    <input required="" id="inputSearchAuto" maxlength="40" autocomplete="off" class="import1 searchinput input-search" type="text" size="20" name="sTuKhoa" placeholder="Tìm kiếm sản phẩm...">
+                                </div>
+
+                                <button type="submit" class="bt_search">
+                                    <svg version="1.1" class="svg-search" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 24 27" style="overflow: hidden;width: 18px;overflow: hidden;height: 45px;fill: #fff;enable-background:new 0 0 24 27;" xml:space="preserve"><path d="M10,2C4.5,2,0,6.5,0,12s4.5,10,10,10s10-4.5,10-10S15.5,2,10,2z M10,19c-3.9,0-7-3.1-7-7s3.1-7,7-7s7,3.1,7,7S13.9,19,10,19z"></path><rect x="17" y="17" transform="matrix(0.7071 -0.7071 0.7071 0.7071 -9.2844 19.5856)" width="4" height="8"></rect></svg>
+                                </button>
+                            </div>
+
+
+                        }
+                    </div>
+
+                </div>
+                @{ if (user != null)
+                    {
+                        <div id="user-info-popup" class="user-info-popup">
+                            <p class="textbox ">Thông tin người dùng</p>
+                            <div class="user-info-popup-content" style="
+                                    font-size: 16px;
+                                ">
+                                <div class="heocon">
+                                    <p href="#" style="margin-bottom: 0px;">Hi: @user.UserName</p>
+                                    <a href="/User/Logout">
+                                        Logout
+                                        <span class="icon"><i class="fas fa-sign-out-alt"></i></span>
+
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    }
+
+                }
+
+            </nav>
+        </div>
+    </div>
+
+
+
+    @RenderBody()
+    <div class="footer">
+        <div class="container-fluid">
+            <div class="tren">
+                <p> <span class="glyphicon glyphicon-earphone"></span> Hỗ trợ / Mua hàng <a href="#">0785988252</a></p>
+            </div>
+            <div class="row">
+                <div class="col-sm-3 text-center">
+                    <img src="~/images/logomende.png" />
+                </div>
+                <div class="col-sm-3">
+                    <p>HỆ THỐNG CỬA HÀNG</p>
+                    <ul>
+                        <li>
+                            - Địa chỉ:
+                        </li>
+                        <li>
+                            <span class="glyphicon glyphicon-qrcode"></span> Sài Gòn: 585/2C Sư Vạn Hạnh, Phường 13, Quận 10, TP. HCM
+                        </li>
+                        <li>
+                            - <span class="glyphicon glyphicon-earphone"></span> Điện thoại: 0785988252
+                        </li>
+                        <li>
+                            - Mail: mendeteam2409@gmail.com
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-sm-6">
+                    <div class="p1">
+                        <p>FANPAGE</p>
+                    </div>
+                    <div class="fanpage">
+                        <div class="container">
+                            <a href="https://www.facebook.com/mendestore/">
+                                <img src="~/images/fanpage.png" alt="Snow" style="width:18%;">
+                            </a>
+                            <div class="bottom-left">
+                                <a href="#">
+                                    Follow Page
+                                </a>
+                            </div>
+                            <div class="top-left">
+                                <img src="~/images/avatar.png" />
+
+                            </div>
+                            <div class="centered">
+                                <a href="https://www.facebook.com/mendestore/">
+                                    MENDE
+                                </a>
+                                <p>
+                                    525,278 followers
+                                </p>
+                            </div>
+                            <div class="bottom-right">
+                                <a href="#">
+                                    <span class="glyphicon glyphicon-share-alt"></span>Share
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://www.gstatic.com/dialogflow-console/fast/messenger/bootstrap.js?v=1"></script>
+    <df-messenger intent="WELCOME"
+                  chat-title="ShopMende"
+                  agent-id="06836237-92be-4aef-86b0-97cc2f682795"
+                  language-code="en"></df-messenger>
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script>
+
+        function toggleUserInfo() {
+            var userInfoPopup = document.getElementById("user-info-popup");
+            userInfoPopup.classList.toggle("show-user-info-popup");
+        }
+    </script>
+    <script src="~/Scripts/timkiem.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+</body>
+</html>
