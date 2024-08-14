@@ -4,6 +4,8 @@
     ViewBag.Title = "GetCartInfo";
     <link href="~/Content/hangl.css" rel="stylesheet" />
     <link rel="stylesheet" type="text/css" href="~/Content/MendeStyle.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
 
 }
 <style>
@@ -23,18 +25,6 @@
         background-color: #eee;
         border: none;
         cursor: pointer;
-    }
-
-    .btn-remove {
-        background-color: #f44336;
-        color: white;
-        border: none;
-        cursor: pointer;
-        padding: 5px 10px;
-    }
-
-    .btn-remove:hover {
-        background-color: #da190b;
     }
 </style>
 @{ var user = Session["User"] as MENDESHOP.Models.User;}
@@ -60,35 +50,38 @@
 
             @foreach (var product in Model)
             {
+                // Calculate the total price for the current product
+                var itemTotalPrice = product.Price * product.Number;
+
                 <tr>
                     <td style="width: 150px;" class="hinh">
                         <img style="max-width: 100%;" src="~/images/@product.ImagePro" />
                     </td>
                     <td>
                         <p>@product.NamePro</p>
-                        <p>Số lượng @product.Number</p>
-                        <p>Quốc's belly'</p>
-                        <p>@product.Price.ToString("N0").000  đ</p>
-
-                        <p>@product.FinalPrice().ToString("N0").000 đ</p>
-
-                    </td>
-                    <td>
-                        @using (Html.BeginForm("RemoveFromCart", "ShoppingCart", FormMethod.Post))
-                        {
-                            @Html.AntiForgeryToken()
-                            @Html.Hidden("id", product.ProductID)
-                            <button type="submit" class="btn-remove">
-                                <span>Xóa</span>
-                            </button>
-                        }
+                        <p>
+                            Số lượng
+                            <div class="quantity-container">
+                                <button type="button" class="quantity-button minus-btn" data-id="@product.ProductID">-</button>
+                                <input type="text" class="quantity-input" data-id="@product.ProductID" value="@product.Number" readonly />
+                                <button type="button" class="quantity-button plus-btn" data-id="@product.ProductID">+</button>
+                            </div>
+                        </p>
+                        <p>Giá tiền: @product.Price.ToString("N0") .000 đ</p>
+                        <p>
+                            Tổng tiền:
+                            <span id="totalPrice-@product.ProductID">@itemTotalPrice.ToString("N0").000 đ</span>
+                        </p>
                     </td>
                 </tr>
             }
-            <tr style="font-weight:bold; text-align:right; color:red;">
-                <td colspan="5">Tổng số lượng: @ViewBag.TotalNumber</td>
-                <td colspan="1">Tổng tiền: @ViewBag.TotalPrice.ToString("N0").000  đ</td>
-            </tr>
+
+
+        <tr style="font-weight:bold; text-align:right; color:red;">
+            <td colspan="5">Tổng số lượng: <span id="totalNumber">@ViewBag.TotalNumber</span></td>
+            <td colspan="1">Tổng tiền: <span id="totalPrice">@ViewBag.TotalPrice.ToString("N0") đ</span></td>
+        </tr>
+
         </table>
         <div class="row" style="margin-bottom:50px">
             <div class="col-sm-6">
@@ -192,29 +185,169 @@
                                     </div>
                                     <div class="field field-required field-third">
                                         <div class="field-input-wrapper field-input-wrapper-select">
-                                            <label class="field-label" for="tinh"> Tỉnh / thành  </label>
-                                            <select class="field-input" id="tinh" name="customer_shipping_province">
-                                                <option value="0" class="hidden-option">Chọn tỉnh / thành</option>
+                                            <label class="field-label" for="customer_shipping_province"> Tỉnh / thành  </label>
+                                            <select class="field-input" id="customer_shipping_province" name="customer_shipping_province">
+                                                <option data-code="null" value="null" selected="">
+                                                    Chọn tỉnh / thành
+                                                </option>
+                                                <option data-code="HC" value="50">Hồ Chí Minh</option>
+                                                <option data-code="HI" value="1">Hà Nội</option>
+                                                <option data-code="DA" value="32">Đà Nẵng</option>
+                                                <option data-code="AG" value="57">An Giang</option>
+                                                <option data-code="BV" value="49">Bà Rịa - Vũng Tàu</option>
+                                                <option data-code="BI" value="47">Bình Dương</option>
+                                                <option data-code="BP" value="45">Bình Phước</option>
+                                                <option data-code="BU" value="39">Bình Thuận</option>
+                                                <option data-code="BD" value="35">Bình Định</option>
+                                                <option data-code="BL" value="62">Bạc Liêu</option>
+                                                <option data-code="BG" value="15">Bắc Giang</option>
+                                                <option data-code="BK" value="4">Bắc Kạn</option>
+                                                <option data-code="BN" value="18">Bắc Ninh</option>
+                                                <option data-code="BT" value="53">Bến Tre</option>
+                                                <option data-code="CB" value="3">Cao Bằng</option>
+                                                <option data-code="CM" value="63">Cà Mau</option>
+                                                <option data-code="CN" value="59">Cần Thơ</option>
+                                                <option data-code="GL" value="41">Gia Lai</option>
+                                                <option data-code="HG" value="2">Hà Giang</option>
+                                                <option data-code="HM" value="23">Hà Nam</option>
+                                                <option data-code="HT" value="28">Hà Tĩnh</option>
+                                                <option data-code="HO" value="11">Hòa Bình</option>
+                                                <option data-code="HY" value="21">Hưng Yên</option>
+                                                <option data-code="HD" value="19">Hải Dương</option>
+                                                <option data-code="HP" value="20">Hải Phòng</option>
+                                                <option data-code="HU" value="60">Hậu Giang</option>
+                                                <option data-code="KH" value="37">Khánh Hòa</option>
+                                                <option data-code="KG" value="58">Kiên Giang</option>
+                                                <option data-code="KT" value="40">Kon Tum</option>
+                                                <option data-code="LI" value="8">Lai Châu</option>
+                                                <option data-code="LA" value="51">Long An</option>
+                                                <option data-code="LO" value="6">Lào Cai</option>
+                                                <option data-code="LD" value="44">Lâm Đồng</option>
+                                                <option data-code="LS" value="13">Lạng Sơn</option>
+                                                <option data-code="ND" value="24">Nam Định</option>
+                                                <option data-code="NA" value="27">Nghệ An</option>
+                                                <option data-code="NB" value="25">Ninh Bình</option>
+                                                <option data-code="NT" value="38">Ninh Thuận</option>
+                                                <option data-code="PT" value="16">Phú Thọ</option>
+                                                <option data-code="PY" value="36">Phú Yên</option>
+                                                <option data-code="QB" value="29">Quảng Bình</option>
+                                                <option data-code="QM" value="33">Quảng Nam</option>
+                                                <option data-code="QG" value="34">Quảng Ngãi</option>
+                                                <option data-code="QN" value="14">Quảng Ninh</option>
+                                                <option data-code="QT" value="30">Quảng Trị</option>
+                                                <option data-code="ST" value="61">Sóc Trăng</option>
+                                                <option data-code="SL" value="9">Sơn La</option>
+                                                <option data-code="TH" value="26">Thanh Hóa</option>
+                                                <option data-code="TB" value="22">Thái Bình</option>
+                                                <option data-code="TY" value="12">Thái Nguyên</option>
+                                                <option data-code="TT" value="31">Thừa Thiên Huế</option>
+                                                <option data-code="TG" value="52">Tiền Giang</option>
+                                                <option data-code="TV" value="54">Trà Vinh</option>
+                                                <option data-code="TQ" value="5">Tuyên Quang</option>
+                                                <option data-code="TN" value="46">Tây Ninh</option>
+                                                <option data-code="VL" value="55">Vĩnh Long</option>
+                                                <option data-code="VT" value="17">Vĩnh Phúc</option>
+                                                <option data-code="YB" value="10">Yên Bái</option>
+                                                <option data-code="DB" value="7">Điện Biên</option>
+                                                <option data-code="DC" value="42">Đắk Lắk</option>
+                                                <option data-code="DO" value="43">Đắk Nông</option>
+                                                <option data-code="DN" value="48">Đồng Nai</option>
+                                                <option data-code="DT" value="56">Đồng Tháp</option>
                                             </select>
                                         </div>
                                     </div>
                                     <div class="field field-required field-third">
                                         <div class="field-input-wrapper field-input-wrapper-select">
-                                            <label class="field-label" for="quan">Quận / huyện</label>
-                                            <select class="field-input" id="quan" name="customer_shipping_district">
-                                                <option value="0" class="hidden-option">Chọn quận / huyện</option>
+                                            <label class="field-label" for="customer_shipping_district">Quận / huyện</label>
+                                            <select class="field-input" id="customer_shipping_district" name="customer_shipping_district">
+                                                <option data-code="null" value="null" selected="">Chọn quận / huyện</option>
+
+
+                                                <option data-code="HC485" value="485">Huyện Bình Chánh</option>
+
+                                                <option data-code="HC487" value="487">Huyện Cần Giờ</option>
+
+                                                <option data-code="HC483" value="483">Huyện Củ Chi</option>
+
+                                                <option data-code="HC484" value="484">Huyện Hóc Môn</option>
+
+                                                <option data-code="HC486" value="486">Huyện Nhà Bè</option>
+
+                                                <option data-code="HC466" value="466">Quận 1</option>
+
+                                                <option data-code="HC475" value="475">Quận 10</option>
+
+                                                <option data-code="HC476" value="476">Quận 11</option>
+
+                                                <option data-code="HC477" value="477">Quận 12</option>
+
+                                                <option data-code="HC468" value="468">Quận 3</option>
+
+                                                <option data-code="HC469" value="469">Quận 4</option>
+
+                                                <option data-code="HC470" value="470">Quận 5</option>
+
+                                                <option data-code="HC471" value="471">Quận 6</option>
+
+                                                <option data-code="HC472" value="472">Quận 7</option>
+
+                                                <option data-code="HC473" value="473">Quận 8</option>
+
+                                                <option data-code="HC679" value="679">Quận Bình Tân</option>
+
+                                                <option data-code="HC480" value="480">Quận Bình Thạnh</option>
+
+                                                <option data-code="HC478" value="478">Quận Gò Vấp</option>
+
+                                                <option data-code="HC481" value="481">Quận Phú Nhuận</option>
+
+                                                <option data-code="HC479" value="479">Quận Tân Bình</option>
+
+                                                <option data-code="HC680" value="680">Quận Tân Phú</option>
+
+                                                <option data-code="HC2670" value="2670">Thành phố Thủ Đức</option>
+
+
                                             </select>
+
                                         </div>
                                     </div>
-                                    <div class="field field-required field-third">
+                                    <div class="field field-required  field-third">
                                         <div class="field-input-wrapper field-input-wrapper-select">
-                                            <label class="field-label" for="phuong">Phường / xã</label>
-                                            <select class="field-input" id="phuong" name="customer_shipping_ward">
-                                                <option value="0" class="hidden-option">Chọn phường / xã</option>
+                                            <label class="field-label" for="customer_shipping_ward">Phường / xã</label>
+                                            <select class="field-input" id="customer_shipping_ward" name="customer_shipping_ward">
+                                                <option data-code="null" value="null" selected="">Chọn phường / xã</option>
+
+
+                                                <option data-code="26779" value="26779">Phường An Phú Đông</option>
+
+                                                <option data-code="26770" value="26770">Phường Hiệp Thành</option>
+
+                                                <option data-code="26767" value="26767">Phường Thạnh Lộc</option>
+
+                                                <option data-code="26764" value="26764">Phường Thạnh Xuân</option>
+
+                                                <option data-code="26773" value="26773">Phường Thới An</option>
+
+                                                <option data-code="26785" value="26785">Phường Trung Mỹ Tây</option>
+
+                                                <option data-code="26776" value="26776">Phường Tân Chánh Hiệp</option>
+
+                                                <option data-code="26787" value="26787">Phường Tân Hưng Thuận</option>
+
+                                                <option data-code="26782" value="26782">Phường Tân Thới Hiệp</option>
+
+                                                <option data-code="26791" value="26791">Phường Tân Thới Nhất</option>
+
+                                                <option data-code="26788" value="26788">Phường Đông Hưng Thuận</option>
+
+
                                             </select>
                                         </div>
                                     </div>
+
                                 </div>
+
                             </div>
                         </form>
                     </div>
@@ -230,53 +363,73 @@
 
 </div>
 
-<style>
-    .hidden-option {
-        display: none;
-    }
-</style>
 
 
 <script>
-    // Lấy tất cả các phần tử quantity-control trên trang
-    var decreaseButton = document.getElementById("decrease");
-    var increaseButton = document.getElementById("increase");
-    var quantityInput = document.getElementById("quantity");
+    $(document).ready(function () {
+        // Handle the plus button click event
+        $('.plus-btn').click(function () {
+            let input = $(this).siblings('.quantity-input');
+            let currentValue = parseInt(input.val());
+            let productId = $(this).data('id');
 
-    decreaseButton.addEventListener("click", function () {
-        var currentValue = parseInt(quantityInput.value);
-        if (currentValue > 0) {
-            quantityInput.value = currentValue - 1;
-        }
-    });
+            input.val(currentValue + 1);
 
-    increaseButton.addEventListener("click", function () {
-        var currentValue = parseInt(quantityInput.value);
-        quantityInput.value = currentValue + 1;
-    });
-</script>
-<script>
-    // Lấy tất cả các phần tử quantity-control trên trang
-    var quantityControls = document.querySelectorAll('.quantity-control');
+            updateQuantity(productId, currentValue + 1);
+        });
 
-    // Duyệt qua từng phần tử và thêm sự kiện cho nút tăng/giảm số lượng
-    quantityControls.forEach(function (control) {
-        var minusButton = control.querySelector('.minus-btn');
-        var plusButton = control.querySelector('.plus-btn');
-        var quantityInput = control.querySelector('.quantity-input');
+        // Handle the minus button click event
+        $('.minus-btn').click(function () {
+            let input = $(this).siblings('.quantity-input');
+            let currentValue = parseInt(input.val());
+            let productId = $(this).data('id');
 
-        minusButton.addEventListener('click', function () {
-            var currentValue = parseInt(quantityInput.value);
             if (currentValue > 1) {
-                quantityInput.value = currentValue - 1;
+                input.val(currentValue - 1);
+
+                updateQuantity(productId, currentValue - 1);
             }
         });
+        // Function to send an AJAX request to update the quantity in the server-side cart
+       function updateQuantity(productId, newQuantity) {
+        $.ajax({
+            url: '@Url.Action("UpdateQuantity", "ShoppingCart")',
+            type: 'POST',
+            data: {
+                id: productId,
+                quantity: newQuantity
+            },
+            success: function (response) {
+                // Update the total price for the product
+                let itemRow = $('button[data-id="' + productId + '"]').closest('tr');
+                let itemPrice = parseFloat(itemRow.find('p:contains("Giá tiền:")').text().replace(/[^0-9.]/g, ''));
+                let itemTotalPrice = (itemPrice * newQuantity);
 
-        plusButton.addEventListener('click', function () {
-            var currentValue = parseInt(quantityInput.value);
-            quantityInput.value = currentValue + 1;
+                $('#totalPrice-' + productId).text(itemTotalPrice.toLocaleString() + ' .000đ');
+
+                // Update the overall cart totals
+                updateCartTotals();
+            },
+            error: function () {
+                alert('Failed to update the cart. Please try again.');
+            }
         });
-    });
+    }
+
+    function updateCartTotals() {
+        $.ajax({
+            url: '@Url.Action("UpdateCartTotals", "ShoppingCart")',
+            type: 'POST',
+            success: function (response) {
+                $('#totalNumber').text(response.totalNumber);
+                $('#totalPrice').text(response.totalPrice.toLocaleString() + ' .000đ');
+            },
+            error: function () {
+                alert('Failed to update cart totals. Please try again.');
+            }
+        });
+    }
+});
 </script>
 <script>
     function showNotification() {
@@ -284,46 +437,3 @@
         window.location.href = '/User/Login'; // Thay đổi '/dang-nhap' thành URL trang đăng nhập của bạn
     }
 </script>
-<script src="https://esgoo.net/scripts/jquery.js"></script>
-<script>
-    $(document).ready(function () {
-        // Lấy tỉnh thành
-        $.getJSON('https://esgoo.net/api-tinhthanh/1/0.htm', function (data_tinh) {
-            if (data_tinh.error == 0) {
-                $.each(data_tinh.data, function (key_tinh, val_tinh) {
-                    $("#tinh").append('<option value="' + val_tinh.id + '">' + val_tinh.full_name + '</option>');
-                });
-
-                $("#tinh").change(function (e) {
-                    var idtinh = $(this).val();
-                    // Lấy quận huyện
-                    $.getJSON('https://esgoo.net/api-tinhthanh/2/' + idtinh + '.htm', function (data_quan) {
-                        if (data_quan.error == 0) {
-                            $("#quan").empty(); // Xóa tất cả các option hiện tại
-                            $("#quan").append('<option value="0" class="hidden-option">Chọn quận / huyện</option>');
-                            $.each(data_quan.data, function (key_quan, val_quan) {
-                                $("#quan").append('<option value="' + val_quan.id + '">' + val_quan.full_name + '</option>');
-                            });
-                            $("#phuong").html('<option value="0" class="hidden-option">Chọn phường / xã</option>'); // Reset phường xã
-
-                            // Lấy phường xã
-                            $("#quan").change(function (e) {
-                                var idquan = $(this).val();
-                                $.getJSON('https://esgoo.net/api-tinhthanh/3/' + idquan + '.htm', function (data_phuong) {
-                                    if (data_phuong.error == 0) {
-                                        $("#phuong").empty(); // Xóa tất cả các option hiện tại
-                                        $("#phuong").append('<option value="0" class="hidden-option">Chọn phường / xã</option>');
-                                        $.each(data_phuong.data, function (key_phuong, val_phuong) {
-                                            $("#phuong").append('<option value="' + val_phuong.id + '">' + val_phuong.full_name + '</option>');
-                                        });
-                                    }
-                                });
-                            });
-                        }
-                    });
-                });
-            }
-        });
-    });
-</script>
-
