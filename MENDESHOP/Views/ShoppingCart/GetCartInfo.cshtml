@@ -24,6 +24,18 @@
         border: none;
         cursor: pointer;
     }
+
+    .btn-remove {
+        background-color: #f44336;
+        color: white;
+        border: none;
+        cursor: pointer;
+        padding: 5px 10px;
+    }
+
+    .btn-remove:hover {
+        background-color: #da190b;
+    }
 </style>
 @{ var user = Session["User"] as MENDESHOP.Models.User;}
 <div class="return">
@@ -61,14 +73,22 @@
                         <p>@product.FinalPrice().ToString("N0").000 đ</p>
 
                     </td>
-
+                    <td>
+                        @using (Html.BeginForm("RemoveFromCart", "ShoppingCart", FormMethod.Post))
+                        {
+                            @Html.AntiForgeryToken()
+                            @Html.Hidden("id", product.ProductID)
+                            <button type="submit" class="btn-remove">
+                                <span>Xóa</span>
+                            </button>
+                        }
+                    </td>
                 </tr>
             }
             <tr style="font-weight:bold; text-align:right; color:red;">
                 <td colspan="5">Tổng số lượng: @ViewBag.TotalNumber</td>
                 <td colspan="1">Tổng tiền: @ViewBag.TotalPrice.ToString("N0").000  đ</td>
             </tr>
-
         </table>
         <div class="row" style="margin-bottom:50px">
             <div class="col-sm-6">
