@@ -77,10 +77,10 @@
             }
 
 
-            <tr style="font-weight:bold; text-align:right; color:red;">
-                <td colspan="5">Tổng số lượng: @ViewBag.TotalNumber</td>
-                <td colspan="1">Tổng tiền: @ViewBag.TotalPrice.ToString("N0").000  đ</td>
-            </tr>
+        <tr style="font-weight:bold; text-align:right; color:red;">
+            <td colspan="5">Tổng số lượng: <span id="totalNumber">@ViewBag.TotalNumber</span></td>
+            <td colspan="1">Tổng tiền: <span id="totalPrice">@ViewBag.TotalPrice.ToString("N0") đ</span></td>
+        </tr>
 
         </table>
         <div class="row" style="margin-bottom:50px">
@@ -403,23 +403,33 @@
                 // Update the total price for the product
                 let itemRow = $('button[data-id="' + productId + '"]').closest('tr');
                 let itemPrice = parseFloat(itemRow.find('p:contains("Giá tiền:")').text().replace(/[^0-9.]/g, ''));
-                let itemTotalPrice = (itemPrice * newQuantity)*1000;
+                let itemTotalPrice = (itemPrice * newQuantity);
 
-                $('#totalPrice-' + productId).text(itemTotalPrice.toLocaleString() + ' đ');
+                $('#totalPrice-' + productId).text(itemTotalPrice.toLocaleString() + ' .000đ');
 
-                // Optionally, update the overall cart totals
-                // $('#totalCartPrice').text(response.totalCartPrice.toLocaleString() + ' đ');
-                // $('#totalCartQuantity').text(response.totalCartQuantity);
+                // Update the overall cart totals
+                updateCartTotals();
             },
             error: function () {
                 alert('Failed to update the cart. Please try again.');
             }
         });
     }
+
+    function updateCartTotals() {
+        $.ajax({
+            url: '@Url.Action("UpdateCartTotals", "ShoppingCart")',
+            type: 'POST',
+            success: function (response) {
+                $('#totalNumber').text(response.totalNumber);
+                $('#totalPrice').text(response.totalPrice.toLocaleString() + ' .000đ');
+            },
+            error: function () {
+                alert('Failed to update cart totals. Please try again.');
+            }
+        });
+    }
 });
-
-
-
 </script>
 <script>
     function showNotification() {

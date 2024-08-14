@@ -97,5 +97,13 @@ namespace MENDESHOP.Controllers
 
             return Json(new { totalNumber = totalNumber, totalPrice = totalPrice });
         }
+        [HttpPost]
+        public JsonResult UpdateCartTotals()
+        {
+            int totalNumber = GetTotalNumber();
+            decimal totalPrice = GetTotalPrice();
+
+            return Json(new { totalNumber = totalNumber, totalPrice = totalPrice });
+        }
     }
 }
