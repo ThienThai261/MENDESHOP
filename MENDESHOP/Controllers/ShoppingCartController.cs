@@ -97,13 +97,35 @@ namespace MENDESHOP.Controllers
 
             return Json(new { totalNumber = totalNumber, totalPrice = totalPrice });
         }
+
         [HttpPost]
         public JsonResult UpdateCartTotals()
+
         {
             int totalNumber = GetTotalNumber();
             decimal totalPrice = GetTotalPrice();
 
             return Json(new { totalNumber = totalNumber, totalPrice = totalPrice });
         }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult RemoveFromCart(int id)
+        {
+            // Lấy giỏ hàng hiện tại
+            List<CartItem> myCart = GetCart();
+            CartItem product = myCart.FirstOrDefault(p => p.ProductID == id);
+
+            if (product != null)
+            {
+                myCart.Remove(product);
+            }
+
+            // Cập nhật giỏ hàng trong Session
+            Session["GioHang"] = myCart;
+
+            // Trả về trang giỏ hàng
+            return RedirectToAction("GetCartInfo");
+        }
     }
+
 }
