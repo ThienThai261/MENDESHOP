@@ -99,6 +99,18 @@ namespace MENDESHOP.Controllers
         }
         [HttpPost]
         public JsonResult UpdateCartTotals()
+<<<<<<< Updated upstream
+=======
+        {
+            int totalNumber = GetTotalNumber();
+            decimal totalPrice = GetTotalPrice();
+
+            return Json(new { totalNumber = totalNumber, totalPrice = totalPrice });
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult RemoveFromCart(int id)
+>>>>>>> Stashed changes
         {
             int totalNumber = GetTotalNumber();
             decimal totalPrice = GetTotalPrice();
