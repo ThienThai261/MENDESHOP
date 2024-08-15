@@ -5,10 +5,7 @@
     <link href="~/Content/hangl.css" rel="stylesheet" />
     <link rel="stylesheet" type="text/css" href="~/Content/MendeStyle.css" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<<<<<<< Updated upstream
 
-=======
->>>>>>> Stashed changes
 
 }
 <style>
@@ -29,8 +26,6 @@
         border: none;
         cursor: pointer;
     }
-<<<<<<< Updated upstream
-=======
 
     .btn-remove {
         background-color: #f44336;
@@ -43,7 +38,6 @@
         .btn-remove:hover {
             background-color: #da190b;
         }
->>>>>>> Stashed changes
 </style>
 @{ var user = Session["User"] as MENDESHOP.Models.User;}
 <div class="return">
@@ -69,13 +63,11 @@
             @foreach (var product in Model)
 
             {
-<<<<<<< Updated upstream
+
                 // Calculate the total price for the current product
                 var itemTotalPrice = product.Price * product.Number;
 
-=======
-                var itemTotalPrice = product.Price * product.Number;
->>>>>>> Stashed changes
+
                 <tr>
                     <td style="width: 150px;" class="hinh">
                         <img style="max-width: 100%;" src="~/images/@product.ImagePro" />
@@ -95,36 +87,36 @@
                             Tổng tiền:
                             <span id="totalPrice-@product.ProductID">@itemTotalPrice.ToString("N0").000 đ</span>
                         </p>
-<<<<<<< Updated upstream
+
                     </td>
                 </tr>
-            }
+                <tr>
 
-
-        <tr style="font-weight:bold; text-align:right; color:red;">
-            <td colspan="5">Tổng số lượng: <span id="totalNumber">@ViewBag.TotalNumber</span></td>
-            <td colspan="1">Tổng tiền: <span id="totalPrice">@ViewBag.TotalPrice.ToString("N0") đ</span></td>
-        </tr>
-
-=======
-                    </td>
-                    <td>
-                        @using (Html.BeginForm("RemoveFromCart", "ShoppingCart", FormMethod.Post))
-                        {
-                            @Html.AntiForgeryToken()
-                            @Html.Hidden("id", product.ProductID)
-                            <button type="submit" class="btn-remove">
-                                <span>Xóa</span>
-                            </button>
-                        }
-                    </td>
+              
+                <td>
+                    @using (Html.BeginForm("RemoveFromCart", "ShoppingCart", FormMethod.Post))
+                    {
+                        @Html.AntiForgeryToken()
+                        @Html.Hidden("id", product.ProductID)
+                        <button type="submit" class="btn-remove">
+                            <span>Xóa</span>
+                        </button>
+                    }
+                </td>
                 </tr>
+
+
+
+
+
+
+
             }
             <tr style="font-weight:bold; text-align:right; color:red;">
                 <td colspan="5">Tổng số lượng: <span id="totalNumber">@ViewBag.TotalNumber</span></td>
                 <td colspan="1">Tổng tiền: <span id="totalPrice">@ViewBag.TotalPrice.ToString("N0") .000đ</span></td>
             </tr>
->>>>>>> Stashed changes
+
         </table>
         <div class="row" style="margin-bottom:50px">
             <div class="col-sm-6">
