@@ -1,17 +1,15 @@
 ﻿﻿@using MENDESHOP.Models
-@model List<CartItem>
+@model List<MENDESHOP.Models.CartItem>
 @{
     ViewBag.Title = "GetCartInfo";
-    <link href="~/Content/hangl.css" rel="stylesheet" />
-    <link rel="stylesheet" type="text/css" href="~/Content/MendeStyle.css" />
+    <link href="~/Content/hangl.css" rel="stylesheet"/>
+    <link rel="stylesheet" type="text/css" href="~/Content/MendeStyle.css"/>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-
-
 }
 <style>
     .quantity-container {
         display: flex;
-        align-items: cent er;
+        align-items: center;
     }
 
     .quantity-input {
@@ -27,7 +25,7 @@
         cursor: pointer;
     }
 </style>
-@{ var user = Session["User"] as MENDESHOP.Models.User;}
+@{ var user = Session["User"] as MENDESHOP.Models.User; }
 <div class="return">
     <div class="container-fluid" style="background-color: #f7f5f5; height:50px;width:100%">
         <div class="container" style="display:flex; line-height: 50px; ">
@@ -39,12 +37,8 @@
         </div>
     </div>
 </div>
-<div class="container" style="
-    display: flex;
-">
-    <div style="
-    flex: 1;
-">
+<div class="container" style=" display: flex;">
+    <div style="flex: 1;">
         <h3 style="font-weight:600">GIỎ HÀNG</h3>
         <table class="table table-bordered">
 
@@ -55,7 +49,7 @@
 
                 <tr>
                     <td style="width: 150px;" class="hinh">
-                        <img style="max-width: 100%;" src="~/images/@product.ImagePro" />
+                        <img style="max-width: 100%;" src="~/images/@product.ImagePro"/>
                     </td>
                     <td>
                         <p>@product.NamePro</p>
@@ -63,7 +57,7 @@
                             Số lượng
                             <div class="quantity-container">
                                 <button type="button" class="quantity-button minus-btn" data-id="@product.ProductID">-</button>
-                                <input type="text" class="quantity-input" data-id="@product.ProductID" value="@product.Number" readonly />
+                                <input type="text" class="quantity-input" data-id="@product.ProductID" value="@product.Number" readonly/>
                                 <button type="button" class="quantity-button plus-btn" data-id="@product.ProductID">+</button>
                             </div>
                         </p>
@@ -85,8 +79,6 @@
                     </td>
                 </tr>
             }
-
-
             <tr style="font-weight:bold; text-align:right; color:red;">
                 <td colspan="5">Tổng số lượng: <span id="totalNumber">@ViewBag.TotalNumber</span></td>
                 <td colspan="1">Tổng tiền: <span id="totalPrice">@ViewBag.TotalPrice.ToString("N0") .000 đ</span></td>
@@ -100,31 +92,30 @@
                 </a>
             </div>
 
-            @{ if (user == null)
+            @{
+                if (user == null)
                 {
-                    <div class="col-sm-6" style=" text-align: right;">
-                        <a style="" class="btn btn-danger" href="" onclick="showNotification()">
+                    <div class="col-sm-6" style="text-align: right;">
+                        <button class="btn btn-danger" onclick="showNotification()">
                             Thanh Toán
-                        </a>
+                        </button>
                     </div>
                 }
                 else
                 {
-                    <div class="col-sm-6" style=" text-align: right;">
-                        <a style="" class="btn btn-danger" href="@Url.Action("Thank", "Products")">
-                            Thanh Toán
-                        </a>
-                    </div>
+                    using (Html.BeginForm("ThanhToan", "Order", FormMethod.Post))
+                    {
+                        <div class="col-sm-6" style="text-align: right;">
+                            <button type="submit" class="btn btn-danger">
+                                Thanh Toán
+                            </button>
+                        </div>
+                    }
                 }
-
             }
-
-
         </div>
     </div>
-    <div class="step" style="
-    flex: 1;
-">
+    <div class="step" style="flex: 1;">
         <div class="step-sections " step="1">
             <div class="section">
                 <div class="section-header">
@@ -132,7 +123,8 @@
                 </div>
 
                 <div style="padding-left: 0.9em;">
-                    @{ if (user == null)
+                    @{
+                        if (user == null)
                         {
                             <p style="margin-bottom: 0em;">
                                 Bạn đã có tài khoản?
@@ -142,31 +134,25 @@
                         else
                         {
                             <div class="logged-in-customer-information" style="display: flex">
-
-
-                                <img style="width: 10%; border-radius:9px" src="~/images/acc3.jpg" />
-
-                                <p class="logged-in-customer-information-paragraph" style="
-                                                        margin: 8px 10px;
-">
+                                <img style="width: 10%; border-radius:9px" src="~/images/acc3.jpg"/>
+                                <p class="logged-in-customer-information-paragraph" style="margin: 8px 10px;">
                                     @user.UserName (@user.Email)
                                     <br>
                                     <a href="/User/Logout">Đăng xuất</a>
                                 </p>
                             </div>
                         }
-
                     }
 
                 </div>
                 <div class="section-content section-customer-information no-mb">
-                    <input type="hidden" name="checkout_user[email]" value="phuc123aw@gmail.com">
+                    <input type="hidden" name="CustomerEmail" value="phuc123aw@gmail.com">
 
                 </div>
                 <div class="section-content">
                     <div class="fieldset">
 
-                        <form autocomplete="off" id="form_update_shipping_method" class="field default" accept-charset="UTF-8" method="post">
+                        <form autocomplete="off" id="form_update_shipping_method" class="field default" accept-charset="UTF-8" action="~/Order/ThanhToan" method="post">
                             <input name="utf8" type="hidden" value="✓">
                             <div class="content-box mt0">
 
@@ -175,27 +161,26 @@
 
                                     <div class="field">
                                         <div class="field-input-wrapper">
-                                            <label class="field-label" for="billing_address_full_name">Họ và tên</label>
-                                            <input placeholder="Họ và tên" autocapitalize="off" spellcheck="false" class="field-input  inpu11" size="30" type="text" id="billing_address_full_name" name="billing_address[full_name]" value="">
-                                        </div>
-
-                                    </div>
-                                    <div class="field field-required">
-                                        <div class="field-input-wrapper">
-                                            <label class="field-label" for="billing_address_phone">Số điện thoại</label>
-                                            <input autocomplete="false" placeholder="Số điện thoại" autocapitalize="off" spellcheck="false" class="field-input inpu11 " size="30" maxlength="15" type="tel" id="billing_address_phone" name="billing_address[phone]" value="">
+                                            <label class="field-label" for="OrderName">Họ và tên</label>
+                                            <input placeholder="Họ và tên" autocapitalize="off" spellcheck="false" class="field-input  inpu11" size="30" type="text" id="OrderName" name="OrderName" value="">
                                         </div>
                                     </div>
                                     <div class="field field-required">
                                         <div class="field-input-wrapper">
-                                            <label class="field-label" for="billing_address_address1">Địa chỉ</label>
-                                            <input placeholder="Địa chỉ" autocapitalize="off" spellcheck="false" class="field-input inpu11" size="30" type="text" id="billing_address_address1" name="billing_address[address1]" value="">
+                                            <label class="field-label" for="CustomerPhone">Số điện thoại</label>
+                                            <input autocomplete="false" placeholder="Số điện thoại" autocapitalize="off" spellcheck="false" class="field-input inpu11 " size="30" maxlength="15" type="tel" id="CustomerPhone" name="CustomerPhone" value="">
+                                        </div>
+                                    </div>
+                                    <div class="field field-required">
+                                        <div class="field-input-wrapper">
+                                            <label class="field-label" for="CustomerAddress">Địa chỉ</label>
+                                            <input placeholder="Địa chỉ" autocapitalize="off" spellcheck="false" class="field-input inpu11" size="30" type="text" id="CustomerAddress" name="CustomerAddress" value="">
                                         </div>
 
                                     </div>
                                     <div class="field field-required field-third">
                                         <div class="field-input-wrapper field-input-wrapper-select">
-                                            <label class="field-label" for="tinh"> Tỉnh / thành  </label>
+                                            <label class="field-label" for="tinh"> Tỉnh / thành </label>
                                             <select class="field-input" id="tinh" name="customer_shipping_province">
                                                 <option value="0" class="hidden-option">Chọn tỉnh / thành</option>
                                             </select>
@@ -217,6 +202,7 @@
                                             </select>
                                         </div>
                                     </div>
+
                                 </div>
                             </div>
                         </form>
@@ -226,14 +212,8 @@
                 </div>
             </div>
         </div>
-
     </div>
-
-
-
 </div>
-
-
 
 <script>
     //Quoc

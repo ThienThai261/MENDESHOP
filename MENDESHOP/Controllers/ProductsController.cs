@@ -14,22 +14,25 @@ namespace MENDESHOP.Controllers
         // GET: Products
         public ActionResult Index()
         {
-            SHOPMENDEEntities dBContext= new SHOPMENDEEntities();
+            SHOPMENDEEntities dBContext = new SHOPMENDEEntities();
             List<Product> Listproduct = dBContext.Products.ToList();
             return View(Listproduct);
         }
+
         public ActionResult Shirt()
         {
             SHOPMENDEEntities dBContext = new SHOPMENDEEntities();
             List<Product> Listproduct = dBContext.Products.ToList();
             return View(Listproduct);
         }
+
         public ActionResult Jacket()
         {
             SHOPMENDEEntities dBContext = new SHOPMENDEEntities();
             List<Product> Listproduct = dBContext.Products.ToList();
             return View(Listproduct);
         }
+
         public ActionResult Tee()
         {
             SHOPMENDEEntities dBContext = new SHOPMENDEEntities();
@@ -50,17 +53,25 @@ namespace MENDESHOP.Controllers
             List<Product> Listproduct = dBContext.Products.ToList();
             return View(Listproduct);
         }
+
         public ActionResult Details(int id)
         {
             SHOPMENDEEntities dBContext = new SHOPMENDEEntities();
             Product product = dBContext.Products.FirstOrDefault(x => x.ProId == id);
             return View(product);
         }
+
         public ActionResult Thank()
         {
-            SHOPMENDEEntities dBContext = new SHOPMENDEEntities();
-            List<Product> Listproduct = dBContext.Products.ToList();
-            return View(Listproduct);
+            using (var dBContext = new SHOPMENDEEntities())
+            {
+                var listProduct = dBContext.Products.ToList();
+
+                // Debugging: Log the number of products retrieved
+                System.Diagnostics.Debug.WriteLine($"Products Count: {listProduct.Count}");
+
+                return View(listProduct);
+            }
         }
-        }
+    }
 }

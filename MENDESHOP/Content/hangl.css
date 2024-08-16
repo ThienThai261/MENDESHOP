@@ -38,7 +38,7 @@
     text-overflow: ellipsis;
     box-sizing: border-box;
     opacity: 0;
-    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=" 0 ")";
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity="0")";
     filter: alpha(opacity = 0);
     color: #999999;
     transition: all 0.2s ease-out;
@@ -51,7 +51,7 @@
     -webkit-transform: none;
     transform: none;
     opacity: 1;
-    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=" 100 ")";
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity="100")";
     filter: alpha(opacity = 100);
 }
 

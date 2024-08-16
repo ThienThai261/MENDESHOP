@@ -1,0 +1,37 @@
+
+@using (Html.BeginForm("ThanhToan", "Order", FormMethod.Post))
+{
+    <div>
+        @Html.LabelFor(model => model.OrderName)
+        @Html.TextBoxFor(model => model.OrderName)
+    </div>
+    <div>
+        @Html.LabelFor(model => model.OrderDate)
+        @Html.TextBoxFor(model => model.OrderDate, "{0:yyyy-MM-dd}")
+    </div>
+    <div>
+        @Html.LabelFor(model => model.PaymentType)
+        @Html.TextBoxFor(model => model.PaymentType)
+    </div>
+    <div>
+        @Html.LabelFor(model => model.Status)
+        @Html.TextBoxFor(model => model.Status)
+    </div>
+    <div>
+        @Html.LabelFor(model => model.CustomerName)
+        @Html.TextBoxFor(model => model.CustomerName)
+    </div>
+    <div>
+        @Html.LabelFor(model => model.CustomerPhone)
+        @Html.TextBoxFor(model => model.CustomerPhone)
+    </div>
+    <div>
+        @Html.LabelFor(model => model.CustomerEmail)
+        @Html.TextBoxFor(model => model.CustomerEmail)
+    </div>
+    <div>
+        @Html.LabelFor(model => model.CustomerAddress)
+        @Html.TextBoxFor(model => model.CustomerAddress)
+    </div>
+    <button type="submit">Thanh Toán</button>
+}
