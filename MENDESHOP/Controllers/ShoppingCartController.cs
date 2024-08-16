@@ -28,6 +28,25 @@ namespace MENDESHOP.Controllers
             return myCart;
         }
       
+        public ActionResult AddToCart(int id)
+        {
+            //Lấy giỏ hàng hiện tại
+            List<CartItem> myCart = GetCart();
+            CartItem currentProduct = myCart.FirstOrDefault(p => p.ProductID == id);
+            if (currentProduct == null)
+            {
+                currentProduct = new CartItem(id);
+                myCart.Add(currentProduct);
+            }
+            else
+            {
+                currentProduct.Number++; //Sản phẩm đã có trong giỏ thì tăng số lượng lên 1
+            }
+            return RedirectToAction("Details", "Products", new
+            {
+                id = id
+            });
+        }
         public ActionResult AddToCart1(int id)
         {
             //Lấy giỏ hàng hiện tại
