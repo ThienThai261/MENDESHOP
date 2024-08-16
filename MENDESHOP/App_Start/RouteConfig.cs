@@ -16,8 +16,7 @@ namespace MENDESHOP
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
-                defaults: new { controller = "Products", action = "Index", id = UrlParameter.Optional },
-                namespaces: new[] { "MENDESHOP.Areas.Admin.Controllers" }
+                defaults: new { controller = "Products", action = "Index", id = UrlParameter.Optional }
             );
         }
     }

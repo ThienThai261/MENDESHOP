@@ -27,25 +27,7 @@ namespace MENDESHOP.Controllers
             }
             return myCart;
         }
-        public ActionResult AddToCart(int id)
-        {
-            //Lấy giỏ hàng hiện tại
-            List<CartItem> myCart = GetCart();
-            CartItem currentProduct = myCart.FirstOrDefault(p => p.ProductID == id);
-            if (currentProduct == null)
-            {
-                currentProduct = new CartItem(id);
-                myCart.Add(currentProduct);
-            }
-            else
-            {
-                currentProduct.Number++; //Sản phẩm đã có trong giỏ thì tăng số lượng lên 1
-            }
-            return RedirectToAction("GetCartInfo", "ShoppingCart", new
-            {
-                id = id
-            });
-        }
+      
         public ActionResult AddToCart1(int id)
         {
             //Lấy giỏ hàng hiện tại
@@ -115,5 +97,35 @@ namespace MENDESHOP.Controllers
 
             return Json(new { totalNumber = totalNumber, totalPrice = totalPrice });
         }
+
+        [HttpPost]
+        public JsonResult UpdateCartTotals()
+
+        {
+            int totalNumber = GetTotalNumber();
+            decimal totalPrice = GetTotalPrice();
+
+            return Json(new { totalNumber = totalNumber, totalPrice = totalPrice });
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult RemoveFromCart(int id)
+        {
+            // Lấy giỏ hàng hiện tại
+            List<CartItem> myCart = GetCart();
+            CartItem product = myCart.FirstOrDefault(p => p.ProductID == id);
+
+            if (product != null)
+            {
+                myCart.Remove(product);
+            }
+
+            // Cập nhật giỏ hàng trong Session
+            Session["GioHang"] = myCart;
+
+            // Trả về trang giỏ hàng
+            return RedirectToAction("GetCartInfo");
+        }
     }
+
 }
