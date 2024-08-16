@@ -10,6 +10,7 @@ using MENDESHOP.Models;
 using System.IO;
 using PagedList;
 using PagedList.Mvc;
+using System.Data.Entity.Infrastructure;
 //test active
 namespace MENDESHOP.Areas.Admin.Controllers
 {
@@ -34,7 +35,7 @@ namespace MENDESHOP.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ProId,ProName,ProPrice,ProImage,CatName")] Product product, HttpPostedFileBase ProImage)
+        public ActionResult Create([Bind(Include = "ProId,ProName,ProPrice,ProImage,CatId")] Product product, HttpPostedFileBase ProImage)
         {
             if (ModelState.IsValid)
             {
@@ -53,7 +54,7 @@ namespace MENDESHOP.Areas.Admin.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.Category = new SelectList(db.Categories, "Id", "CatName", product.Category);
+            ViewBag.Category = new SelectList(db.Categories, "Id", "CatName", product.CatId);
             return View(product);
         }
         // GET: Products/Details/5
@@ -83,17 +84,56 @@ namespace MENDESHOP.Areas.Admin.Controllers
             {
                 return HttpNotFound();
             }
+            //categoriesDropDownList(product.CatId);
             ViewBag.Category = new SelectList(db.Categories, "Id", "CatName", product.Category);
             return View(product);
         }
 
-        // POST: Products/Edit/5
+        //POST: Products/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+ //test
+        //[HttpPost, ActionName("Edit")]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult EditPost(int? id)
+        //{
+
+        //    if (id == null)
+        //    {
+        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+        //    }
+        //    var product = db.Products.Find(id);
+        //    if (TryUpdateModel(product, "",
+        //       new string[] { "ProId", "ProName", "CatId", "ProPrice", "ProImage" }))
+        //    {
+        //        try
+        //        {
+        //            db.SaveChanges();
+
+        //            return RedirectToAction("Index");
+        //        }
+        //        catch (RetryLimitExceededException /* dex */)
+        //        {
+        //            //Log the error (uncomment dex variable name and add a line here to write a log.
+        //            ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists, see your system administrator.");
+        //        }
+        //    }
+        //    categoriesDropDownList(product.CatId);
+        //    //ViewBag.Category = new SelectList(db.Categories, "Id", "CatName", product.Category);
+        //    return View(product);
+        //}
+//-------------------
+        private void categoriesDropDownList(object selected = null)
+        {
+            ViewBag.Category = new SelectList(db.Categories, "id", "catname", selected);
+        }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ProId,Category,ProName,ProPrice,ProImage,CatName")] Product product, HttpPostedFileBase ProImage)
+        public ActionResult Edit([Bind(Include = "ProId,CatId,ProName,ProPrice,ProImage")] Product product, HttpPostedFileBase ProImage)
         {
+            Console.WriteLine(product.ToString());
+
             if (ModelState.IsValid)
             {
                 var productDB = db.Products.FirstOrDefault(p => p.ProId == product.ProId);
@@ -112,16 +152,15 @@ namespace MENDESHOP.Areas.Admin.Controllers
                         //Save vào Images Folder
                         ProImage.SaveAs(path);
                     }
-                    productDB.Category = product.Category;
+                    productDB.CatId = product.CatId;
                 }
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.Category = new SelectList(db.Categories, "Id", "CatName", product.Category);
+            categoriesDropDownList(product.CatId);
+            //ViewBag.Category = new SelectList(db.Categories, "Id", "CatName", product.CatId);
             return View(product);
         }
-
-
 
         // GET: Products/Delete/5
         public ActionResult Delete(int? id)
