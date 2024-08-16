@@ -7,7 +7,7 @@
 
 <div style="margin: 10px auto; width: 70%;">
     <h2 style="text-align: center">CHỈNH SỬA SẢN PHẨM</h2>
-    @using (Html.BeginForm("Edit", "Products", FormMethod.Post, new
+    @using (Html.BeginForm("Edit/" + Model.ProId, "Product", FormMethod.Post, new
     {
         @enctype = "multipart/form-data"
     }))
@@ -29,10 +29,18 @@
             <div class="form-group">
                 NHÓM SẢN PHẨM
                 <div class="col-lg-push-9">
-                    @Html.DropDownList("Category", null, htmlAttributes: new { @class = "form-control" })
-                    @Html.ValidationMessageFor(model => model.Category, "", new { @class = "text-danger" })
+                  @*  @Html.DropDownList("Category", null, htmlAttributes: new { @class = "form-control" })*@
+                    @Html.DropDownListFor(model => model.CatId, (SelectList)ViewBag.Category, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.CatId, "", new { @class = "text-danger" })
                 </div>
             </div>
+            <script>
+                // Lắng nghe sự kiện change trên dropdown với id 'categoryDropdown'
+                document.getElementById('Category').addEventListener('change', function () {
+                    var selectedValue = this.value;
+                    console.log('Giá trị đã chọn từ dropdown: ' + selectedValue);
+                });
+            </script>
             <div class="form-group">
                 GIÁ
                 <div class="col-lg-push-9">
@@ -41,13 +49,12 @@
                 </div>
             </div>
             <div class="form-group">
-             
                 <div class="col-lg-push-9">
                     CHỌN ẢNH MỚI
                     <div>
-                        <input type="file" name="ImagePro" style="padding-bottom: 20px;" />
+                        <input type="file" name="ProImage" style="padding-bottom: 20px;" />
                         <div>HÌNH SẢN PHẨM</div>
-                        <img src="/images/anh1_1.png"  style="width: 65%;">
+                        <img src="~/images/@Model.ProImage" style="width: 65%;">
                         @Html.ValidationMessageFor(model => model.ProImage, "", new { @class = "text-danger" })
                     </div>
                 </div>
